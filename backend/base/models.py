@@ -12,6 +12,8 @@ class UserProfile(models.Model):
     phoneNumber = models.IntegerField(blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.PROTECT, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
+    latitude = models.CharField(max_length=200, null=True, blank=True)
+    logitude = models.CharField(max_length=200, null=True, blank=True)
 
 class Product(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=PROTECT)
@@ -72,37 +74,37 @@ class Supplier(models.Model):
         return self.name
 
 
-class Income(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
-    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True) 
-    date = models.DateField()  
-    name = models.CharField(max_length=200, null=True, blank=True)
-    amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
+# class Income(models.Model):
+#     _id = models.AutoField(primary_key=True, editable=False)
+#     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True) 
+#     date = models.DateField()  
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+#     createdAt = models.DateTimeField(auto_now_add=True)
     
     
     
 
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    class Meta:
-        verbose_name_plural = 'Income'
+#     class Meta:
+#         verbose_name_plural = 'Income'
 
-class Expense(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
-    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
-    date = models.DateField()
-    name = models.CharField(max_length=200, null=True, blank=True)
-    amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
+# class Expense(models.Model):
+#     _id = models.AutoField(primary_key=True, editable=False)
+#     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
+#     date = models.DateField()
+#     name = models.CharField(max_length=200, null=True, blank=True)
+#     amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+#     createdAt = models.DateTimeField(auto_now_add=True)
     
     
 
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
     

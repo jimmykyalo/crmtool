@@ -24,7 +24,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default='/placeholder.jpg')
     def __str__(self):
-        return self.name + ' ' + self.type
+        return str(self.name) + ' ' + str(self.type)
 
 class Staff(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
@@ -92,19 +92,19 @@ class Supplier(models.Model):
 #     class Meta:
 #         verbose_name_plural = 'Income'
 
-# class Expense(models.Model):
-#     _id = models.AutoField(primary_key=True, editable=False)
-#     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
-#     date = models.DateField()
-#     name = models.CharField(max_length=200, null=True, blank=True)
-#     amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-#     createdAt = models.DateTimeField(auto_now_add=True)
+class Expense(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)    
+    date = models.DateField()
+    name = models.CharField(max_length=200, null=True, blank=True)
+    amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
     
     
 
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
     
@@ -128,7 +128,8 @@ class Stock(models.Model):
         verbose_name_plural = 'Stock'
 
     def __str__(self):
-        return self.batchNumber + ' --- ' + self.product.name + ' ' + self.product.type
+        
+        return str(self.batchNumber)
 
 class Damage(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
@@ -153,8 +154,8 @@ class Sale(models.Model):
     unitPrice = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     totalPrice = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     onCredit = models.BooleanField(default=False)
-    deposit = models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    tax=models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    deposit = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    tax=models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     staff = models.ForeignKey(Staff, on_delete=models.PROTECT, null=True, blank=True)
 
 class Installment(models.Model):
